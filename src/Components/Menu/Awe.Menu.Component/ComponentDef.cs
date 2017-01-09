@@ -1,10 +1,7 @@
 ﻿using Module.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-[assembly: DefaultNamespace(nameof(Aew.Menu.Component))]
+[assembly: DefaultNamespace("Aew.Menu.Component")]
 namespace Aew.Menu.Component
 {
     public class ComponentDef : IBaseViewComponent

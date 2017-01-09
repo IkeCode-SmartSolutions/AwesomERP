@@ -2,12 +2,9 @@
 using Awe.Menu.Service;
 using Module.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-[assembly: DefaultNamespace(nameof(PersonModule))]
-namespace PersonModule
+[assembly: DefaultNamespace("Awe.Person.Module")]
+namespace Awe.Person.Module
 {
     public class ModuleDef : IBaseModule
     {

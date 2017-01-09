@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "Awe.Module.Core": "1.0.0-*",
-    "AwesomeErp.Core": "1.0.0-*"
+    "Awe.Core": "1.0.0-*"
   },
 
   "tools": {},

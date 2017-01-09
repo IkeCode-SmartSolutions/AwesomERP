@@ -3,12 +3,14 @@
     "Awe.Menu.Component": "1.0.0-*",
     "Awe.Menu.Service": "1.0.0-*",
     "Awe.Module.Core": "1.0.0-*",
-    "Awe.Person.Module": "1.0.0-*",
-    "AwesomeErp.Core": "1.0.0-*",
-    "TodoViewComponent": "1.0.0-*"
+    "Awe.Core": "1.0.0-*",
+    "TodoViewComponent": "1.0.0-*",
+    "Awe.Remark.Theme": "1.0.0-*",
+    "Awe.Person.Module": "1.0.0-*"
   },
 
   "tools": {
+    "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final"
   },
 
   "frameworks": {
@@ -36,7 +38,8 @@
         "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
         "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
-        "Microsoft.Extensions.Logging.Abstractions": "1.1.0"
+        "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+        "Microsoft.AspNetCore.Razor.Runtime": "1.1.0"
       },
       "imports": "dnxcore50"
     }

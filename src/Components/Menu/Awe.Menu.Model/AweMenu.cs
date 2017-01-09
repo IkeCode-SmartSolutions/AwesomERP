@@ -1,9 +1,6 @@
-﻿using AwesomeErp.Core.Crypto;
-using System;
+﻿using Awe.Core.Crypto;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Awe.Menu
 {

@@ -1,3 +1,7 @@
-﻿<div class="row">
+﻿@{ 
+    ViewData["Title"] = "Página Inicial";
+}
+
+<div class="row">
     @await Component.InvokeAsync("TodoViewComponent.Todo", new { number = 5 })
 </div>

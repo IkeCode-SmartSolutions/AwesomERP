@@ -1,0 +1,12 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<minhatag>
+    <h1>Remark</h1>
+    @RenderBody()
+</minhatag>
+
+@section scripts{
+    @RenderSection("scripts", required: false)
+}

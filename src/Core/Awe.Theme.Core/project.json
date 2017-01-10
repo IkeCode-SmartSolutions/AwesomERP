@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "Awe.Core": "1.0.0-*",
+    "Awe.Module.Core": "1.0.0-*",
     "Awe.Mvc.Core": "1.0.0-*"
   },
 
@@ -29,7 +31,11 @@
 
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "embed": [
+      "Views/**/*",
+      "wwwroot/**/*"
+    ]
   },
 
   "runtimeOptions": {

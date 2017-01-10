@@ -6,7 +6,8 @@
     "Awe.Core": "1.0.0-*",
     "TodoViewComponent": "1.0.0-*",
     "Awe.Remark.Theme": "1.0.0-*",
-    "Awe.Person.Module": "1.0.0-*"
+    "Awe.Person.Module": "1.0.0-*",
+    "Awe.Theme.Core": "1.0.0-*"
   },
 
   "tools": {

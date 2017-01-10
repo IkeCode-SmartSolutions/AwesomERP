@@ -16,6 +16,7 @@ namespace Module.Core
 
             instance.Invoke<IBaseModule>();
             instance.Invoke<IBaseViewComponent>();
+            instance.Invoke<IBaseTheme>();
 
             //return app.UseMiddleware<RegisterModules>(app, folderPath);
             return app;
@@ -40,6 +41,7 @@ namespace Module.Core
             var instance = AwesomeRazorViewModuleRegister.CreateInstance(services, folderPath);
             instance.Invoke<IBaseModule>();
             instance.Invoke<IBaseViewComponent>();
+            instance.Invoke<IBaseTheme>();
 
             return services;
         }

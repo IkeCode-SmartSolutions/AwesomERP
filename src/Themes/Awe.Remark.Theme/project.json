@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "Awe.Module.Core": "1.0.0-*",
+    "Awe.Mvc.Core": "1.0.0-*",
     "Awe.Theme.Core": "1.0.0-*"
   },
 
@@ -29,7 +31,14 @@
 
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "embed": [
+      "Theme/Remark/**/*.cshtml",
+      "Views/**/*.cshtml",
+      "wwwroot/**/*.*"
+      //"**/*.css"
+      //"**/*.ttf"
+    ]
   },
 
   "runtimeOptions": {

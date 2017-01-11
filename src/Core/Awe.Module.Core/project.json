@@ -4,6 +4,7 @@
   "dependencies": {
     "Awe.Core": "1.0.0-*",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.Core": "1.1.0",
     "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
     "Microsoft.AspNetCore.StaticFiles": "1.1.0",
     "Microsoft.Extensions.FileProviders.Embedded": "1.1.0"

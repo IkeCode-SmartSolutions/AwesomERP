@@ -11,6 +11,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Awe.Core.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Awe.Menu.Service;
+using Awe.Mvc.Core.TagHelpers;
 
 namespace Site
 {
@@ -40,6 +41,8 @@ namespace Site
                 .RegisterModulesMvc();
             
             services.RegisterModulesRazorView();
+
+            services.AddTransient<IAweOverrideTagHelper<ButtonTagHelper>, RemarkButtonTagHelper>();
 
             services.AddSingleton<IAweMenuService, AweMenuService>();
         }

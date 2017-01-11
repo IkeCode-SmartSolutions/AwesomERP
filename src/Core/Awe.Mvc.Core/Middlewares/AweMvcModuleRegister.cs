@@ -1,19 +1,19 @@
 ﻿using Awe.Core.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Module.Core.Middlewares
+namespace Awe.Mvc.Core.Middlewares
 {
-    public class AwesomeMvcModuleRegister : BaseMiddleware<IMvcBuilder>
+    public class AweMvcModuleRegister : AweBaseMiddleware<IMvcBuilder>
     {
-        private AwesomeMvcModuleRegister(IMvcBuilder mvcBuilder, string folderPath)
+        private AweMvcModuleRegister(IMvcBuilder mvcBuilder, string folderPath)
             : base(folderPath)
         {
             ReturnObj = mvcBuilder;
         }
 
-        public static AwesomeMvcModuleRegister CreateInstance(IMvcBuilder mvcBuilder, string folderPath)
+        public static AweMvcModuleRegister CreateInstance(IMvcBuilder mvcBuilder, string folderPath)
         {
-            return new AwesomeMvcModuleRegister(mvcBuilder, folderPath);
+            return new AweMvcModuleRegister(mvcBuilder, folderPath);
         }
 
         public override IMvcBuilder Invoke<T>()

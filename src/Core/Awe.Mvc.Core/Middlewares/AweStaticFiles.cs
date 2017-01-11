@@ -7,21 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 
-namespace Module.Core.Middlewares
+namespace Awe.Mvc.Core.Middlewares
 {
-    public class AwesomeStaticFilesRegister : BaseMiddleware<IApplicationBuilder>
+    public class AweStaticFilesRegister : AweBaseMiddleware<IApplicationBuilder>
     {
         private IApplicationBuilder _app;
 
-        private AwesomeStaticFilesRegister(IApplicationBuilder app, string folderPath)
+        private AweStaticFilesRegister(IApplicationBuilder app, string folderPath)
             : base(folderPath)
         {
             _app = app;
         }
 
-        public static AwesomeStaticFilesRegister CreateInstance(IApplicationBuilder app, string folderPath)
+        public static AweStaticFilesRegister CreateInstance(IApplicationBuilder app, string folderPath)
         {
-            return new AwesomeStaticFilesRegister(app, folderPath);
+            return new AweStaticFilesRegister(app, folderPath);
         }
 
         public override IApplicationBuilder Invoke<T>()

@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Awe.Module.Core;
+using Awe.Mvc.Core.Middlewares;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
-using Module.Core.Middlewares;
 
-namespace Module.Core
+namespace Awe.Mvc.Core
 {
     public static class MiddlewareExtensions
     {
@@ -12,11 +13,11 @@ namespace Module.Core
             if (string.IsNullOrWhiteSpace(folderPath))
                 folderPath = PlatformServices.Default.Application.ApplicationBasePath;
 
-            var instance = AwesomeStaticFilesRegister.CreateInstance(app, folderPath);
+            var instance = AweStaticFilesRegister.CreateInstance(app, folderPath);
 
-            instance.Invoke<IBaseModule>();
-            instance.Invoke<IBaseViewComponent>();
-            instance.Invoke<IBaseTheme>();
+            instance.Invoke<IAweModule>();
+            instance.Invoke<IAweViewComponent>();
+            instance.Invoke<IAweTheme>();
 
             //return app.UseMiddleware<RegisterModules>(app, folderPath);
             return app;
@@ -27,8 +28,8 @@ namespace Module.Core
             if (string.IsNullOrWhiteSpace(folderPath))
                 folderPath = PlatformServices.Default.Application.ApplicationBasePath;
 
-            var instance = AwesomeMvcModuleRegister.CreateInstance(mvcBuilder, folderPath);
-            instance.Invoke<IBaseComponent>();
+            var instance = AweMvcModuleRegister.CreateInstance(mvcBuilder, folderPath);
+            instance.Invoke<IAweComponent>();
             
             return mvcBuilder;
         }
@@ -38,10 +39,10 @@ namespace Module.Core
             if (string.IsNullOrWhiteSpace(folderPath))
                 folderPath = PlatformServices.Default.Application.ApplicationBasePath;
 
-            var instance = AwesomeRazorViewModuleRegister.CreateInstance(services, folderPath);
-            instance.Invoke<IBaseModule>();
-            instance.Invoke<IBaseViewComponent>();
-            instance.Invoke<IBaseTheme>();
+            var instance = AweRazorViewModuleRegister.CreateInstance(services, folderPath);
+            instance.Invoke<IAweModule>();
+            instance.Invoke<IAweViewComponent>();
+            instance.Invoke<IAweTheme>();
 
             return services;
         }

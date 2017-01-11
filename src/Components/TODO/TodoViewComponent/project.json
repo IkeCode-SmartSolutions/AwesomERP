@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "Awe.Module.Core": "1.0.0-*",
-    "Awe.Core": "1.0.0-*"
+    "Awe.Core": "1.0.0-*",
+    "Autofac.Extensions.DependencyInjection": "4.0.0"
   },
 
   "tools": {},

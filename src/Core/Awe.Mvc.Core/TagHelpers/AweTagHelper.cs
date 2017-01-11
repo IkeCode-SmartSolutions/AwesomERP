@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Awe.Mvc.Core.TagHelpers
 {
@@ -15,7 +16,7 @@ namespace Awe.Mvc.Core.TagHelpers
         where TBaseClass : TagHelper
     {
         protected readonly IServiceProvider ServiceProvider;
-        
+
         public AweTagHelper(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
@@ -28,7 +29,7 @@ namespace Awe.Mvc.Core.TagHelpers
         public sealed override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             var customImplementation = ServiceProvider.GetService<IAweOverrideTagHelper<TBaseClass>>();
-
+            
             if (customImplementation != null)
             {
                 await customImplementation.CustomProcessAsync(Self, context, output);

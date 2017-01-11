@@ -1,6 +1,7 @@
-﻿namespace Module.Core
+﻿namespace Awe.Module.Core
 {
-    public interface IBaseComponent
+
+    public interface IAweComponent
     {
         string Name { get; }
         string Description { get; }

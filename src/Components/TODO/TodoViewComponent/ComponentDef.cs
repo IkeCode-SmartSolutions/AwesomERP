@@ -1,10 +1,10 @@
-﻿using Module.Core;
+﻿using Awe.Module.Core;
 using System;
 
 [assembly: DefaultNamespace("TodoViewComponent")]
 namespace TodoViewComponent
 {
-    public class ComponentDef : IBaseViewComponent
+    public class ComponentDef : IAweViewComponent
     {
         public string Description { get { return "TODO component description"; } }
 

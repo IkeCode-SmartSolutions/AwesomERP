@@ -3,21 +3,21 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.Collections.Generic;
 
-namespace Module.Core.Middlewares
+namespace Awe.Mvc.Core.Middlewares
 {
-    public class AwesomeRazorViewModuleRegister : BaseMiddleware<IServiceCollection>
+    public class AweRazorViewModuleRegister : AweBaseMiddleware<IServiceCollection>
     {
         private IServiceCollection _serviceCollection;
 
-        private AwesomeRazorViewModuleRegister(IServiceCollection serviceCollection, string folderPath)
+        private AweRazorViewModuleRegister(IServiceCollection serviceCollection, string folderPath)
             : base(folderPath)
         {
             _serviceCollection = serviceCollection;
         }
 
-        public static AwesomeRazorViewModuleRegister CreateInstance(IServiceCollection serviceCollection, string folderPath)
+        public static AweRazorViewModuleRegister CreateInstance(IServiceCollection serviceCollection, string folderPath)
         {
-            return new AwesomeRazorViewModuleRegister(serviceCollection, folderPath);
+            return new AweRazorViewModuleRegister(serviceCollection, folderPath);
         }
 
         public override IServiceCollection Invoke<T>()

@@ -1,15 +1,16 @@
-﻿using Awe.Core.Reflection;
+﻿using Awe.Core;
+using Awe.Core.Reflection;
 using Microsoft.Extensions.FileProviders;
 using System.Collections.Generic;
 
-namespace Module.Core.Middlewares
+namespace Awe.Mvc.Core.Middlewares
 {
-    public abstract class BaseMiddleware<TReturnObject>
+    public abstract class AweBaseMiddleware<TReturnObject>
     {
         protected readonly string FolderPath;
         protected TReturnObject ReturnObj;
 
-        public BaseMiddleware(string folderPath)
+        public AweBaseMiddleware(string folderPath)
         {
             FolderPath = folderPath;
         }

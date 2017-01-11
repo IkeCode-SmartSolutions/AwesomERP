@@ -1,12 +1,12 @@
 ﻿using Awe.Menu;
 using Awe.Menu.Service;
-using Module.Core;
+using Awe.Module.Core;
 using System;
 
 [assembly: DefaultNamespace("Awe.Person.Module")]
 namespace Awe.Person.Module
 {
-    public class ModuleDef : IBaseModule
+    public class ModuleDef : IAweModule
     {
         private IAweMenuService _menuService;
         public ModuleDef(IAweMenuService menuService)

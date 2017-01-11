@@ -1,10 +1,10 @@
-﻿using Module.Core;
+﻿using Awe.Module.Core;
 using System;
 
 [assembly: DefaultNamespace("Aew.Menu.Component")]
 namespace Aew.Menu.Component
 {
-    public class ComponentDef : IBaseViewComponent
+    public class ComponentDef : IAweViewComponent
     {
         public string Description { get { return "Menu component description"; } }
 

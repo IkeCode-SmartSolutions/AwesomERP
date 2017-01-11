@@ -6,12 +6,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
-using Module.Core;
 using Microsoft.Extensions.PlatformAbstractions;
 using Awe.Core.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Awe.Menu.Service;
 using Awe.Mvc.Core.TagHelpers;
+using Awe.Mvc.Core;
+using Awe.Module.Core;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using System;
 
 namespace Site
 {
@@ -28,11 +32,12 @@ namespace Site
         }
 
         public IConfigurationRoot Configuration { get; }
+        public IContainer ApplicationContainer { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"Server=.\SQLEXPRESS;Database=AwesomeErp;Trusted_Connection=True;";
+            //var connection = @"Server=.\SQLEXPRESS;Database=AwesomeErp;Trusted_Connection=True;";
             //services.AddDbContext<MenuContext>(options => options.UseSqlServer(connection));
 
             // Add framework services.
@@ -46,9 +51,12 @@ namespace Site
 
             services.AddSingleton<IAweMenuService, AweMenuService>();
         }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, 
+                              IHostingEnvironment env, 
+                              ILoggerFactory loggerFactory,
+                              IApplicationLifetime appLifetime)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -67,7 +75,7 @@ namespace Site
                 .UseStaticFiles()
                 .RegisterModulesStaticFiles();
 
-            var modules = AssemblyTools.LoadAssembliesThatImplements<IBaseModule>(PlatformServices.Default.Application.ApplicationBasePath);
+            var modules = AssemblyTools.LoadAssembliesThatImplements<IAweModule>(PlatformServices.Default.Application.ApplicationBasePath);
 
             var menus = new Dictionary<string, List<string>>();
 
@@ -83,7 +91,7 @@ namespace Site
 
                     //urlHelper.RouteUrl()
 
-                    var a = 1;
+                    //var a = 1;
                 }
             }
 
@@ -94,6 +102,10 @@ namespace Site
                         name: "default",
                         template: "{controller=Home}/{action=Index}/{id?}");
                 });
+
+            // If you want to dispose of resources that have been resolved in the
+            // application container, register for the "ApplicationStopped" event.
+            appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
         }
     }
 }

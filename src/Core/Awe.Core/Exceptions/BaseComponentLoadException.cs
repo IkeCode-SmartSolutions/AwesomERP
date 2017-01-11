@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Module.Core
+namespace Awe.Core
 {
     public class BaseComponentLoadException : Exception
     {

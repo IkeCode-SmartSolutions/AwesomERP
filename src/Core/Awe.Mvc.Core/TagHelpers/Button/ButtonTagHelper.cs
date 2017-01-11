@@ -1,59 +1,21 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Autofac;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Threading.Tasks;
 
 namespace Awe.Mvc.Core.TagHelpers
 {
     [HtmlTargetElement("bootstrap-button")]
-    public class ButtonTagHelper : TagHelper
+    public class ButtonTagHelper : AweTagHelper<ButtonTagHelper>
     {
-        [HtmlAttributeName("element")]
-        public string ButtonElement { get; set; }
+        public override ButtonTagHelper Self { get { return this; } }
 
-        [HtmlAttributeName("id")]
-        public string ButtonId { get; set; }
-
-        [HtmlAttributeName("autocomplete")]
-        public string ButtonAutocomplete { get; set; }
-
-        [HtmlAttributeName("loading-text")]
-        public string ButtonLoadingText { get; set; }
-
-        [HtmlAttributeName("class")]
-        public string ButtonClass { get; set; }
-
-        [HtmlAttributeName("type")]
-        public string ButtonType { get; set; }
-
-        [HtmlAttributeName("option")]
-        public string ButtonOption { get; set; }
-
-        [HtmlAttributeName("size")]
-        public string ButtonSize { get; set; }
-
-        [HtmlAttributeName("active")]
-        public bool ButtonActive { get; set; }
-
-        [HtmlAttributeName("disabled")]
-        public bool ButtonDisabled { get; set; }
-
-        [HtmlAttributeName("block")]
-        public bool ButtonBlock { get; set; }
-
-        [HtmlAttributeName("value")]
-        public string ButtonValue { get; set; }
-
-        [HtmlAttributeName("link")]
-        public string ButtonLink { get; set; }
-
-        [HtmlAttributeName("target")]
-        public string ButtonTarget { get; set; }
-
-        public ButtonTagHelper() : base()
+        public ButtonTagHelper(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
         }
 
-        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
+        public override async Task CustomProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             string str1 = ButtonValue.Length <= 0 ? (await output.GetChildContentAsync()).GetContent() : ButtonValue;
             string[] array1 = new string[3]
@@ -104,5 +66,47 @@ namespace Awe.Mvc.Core.TagHelpers
                 str4 = string.Format("<button type='{0}' class='{1}' {2}  id='{3}' autocomplete='{4}' data-loading-text='{5}'>{6}</button>", (object)ButtonType, (object)ButtonClass, (object)str2, (object)ButtonId, (object)ButtonAutocomplete, (object)ButtonLoadingText, (object)str1);
             output.Content.AppendHtml(str4);
         }
+
+        [HtmlAttributeName("element")]
+        public string ButtonElement { get; set; }
+
+        [HtmlAttributeName("id")]
+        public string ButtonId { get; set; }
+
+        [HtmlAttributeName("autocomplete")]
+        public string ButtonAutocomplete { get; set; }
+
+        [HtmlAttributeName("loading-text")]
+        public string ButtonLoadingText { get; set; }
+
+        [HtmlAttributeName("class")]
+        public string ButtonClass { get; set; }
+
+        [HtmlAttributeName("type")]
+        public string ButtonType { get; set; }
+
+        [HtmlAttributeName("option")]
+        public string ButtonOption { get; set; }
+
+        [HtmlAttributeName("size")]
+        public string ButtonSize { get; set; }
+
+        [HtmlAttributeName("active")]
+        public bool ButtonActive { get; set; }
+
+        [HtmlAttributeName("disabled")]
+        public bool ButtonDisabled { get; set; }
+
+        [HtmlAttributeName("block")]
+        public bool ButtonBlock { get; set; }
+
+        [HtmlAttributeName("value")]
+        public string ButtonValue { get; set; }
+
+        [HtmlAttributeName("link")]
+        public string ButtonLink { get; set; }
+
+        [HtmlAttributeName("target")]
+        public string ButtonTarget { get; set; }
     }
 }

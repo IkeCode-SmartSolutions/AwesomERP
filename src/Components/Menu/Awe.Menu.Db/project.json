@@ -2,6 +2,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "Autofac.Extensions.DependencyInjection": "4.0.0",
     "Awe.Menu.Model": "1.0.0-*",
     "Microsoft.EntityFrameworkCore.Design": "1.1.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",

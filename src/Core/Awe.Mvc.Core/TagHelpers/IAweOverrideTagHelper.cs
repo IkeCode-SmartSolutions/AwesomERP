@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,6 @@ namespace Awe.Mvc.Core.TagHelpers
     public interface IAweOverrideTagHelper<TBaseClass> : IAweTagHelper<TBaseClass>
         where TBaseClass : TagHelper
     {
-        Task CustomProcessAsync(TBaseClass baseClassInstance, TagHelperContext context, TagHelperOutput output);
+        void CustomProcess(TBaseClass baseClassInstance, TagBuilder builder, TagHelperContext context, TagHelperOutput output);
     }
 }

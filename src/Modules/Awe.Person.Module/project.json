@@ -45,11 +45,14 @@
     "preserveCompilationContext": true,
     "embed": [
       "Views/**/*",
-      "wwwroot/**/*",
-      "**/*.js"
-      //"**/*.css",
-      //"**/*.ttf"
-    ]
+      "wwwroot/**/*"
+    ],
+    "compile": {
+      "exclude": [
+        "wwwroot",
+        "node_modules"
+      ]
+    }
   },
 
   "runtimeOptions": {

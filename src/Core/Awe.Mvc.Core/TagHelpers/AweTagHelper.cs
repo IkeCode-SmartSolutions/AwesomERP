@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Awe.Mvc.Core.TagHelpers
 {
@@ -23,21 +24,24 @@ namespace Awe.Mvc.Core.TagHelpers
         }
 
         public abstract TBaseClass Self { get; }
+        public abstract TagBuilder Builder { get; }
 
-        public abstract Task CustomProcessAsync(TagHelperContext context, TagHelperOutput output);
-
+        public abstract Task CustomProcessAsync(TagBuilder builder, TagHelperContext context, TagHelperOutput output);
+        
         public sealed override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             var customImplementation = ServiceProvider.GetService<IAweOverrideTagHelper<TBaseClass>>();
             
             if (customImplementation != null)
             {
-                await customImplementation.CustomProcessAsync(Self, context, output);
+                customImplementation.CustomProcess(Self, Builder, context, output);
             }
             else
             {
-                await CustomProcessAsync(context, output);
+                await CustomProcessAsync(Builder, context, output);
             }
+
+            await base.ProcessAsync(context, output);
         }
     }
 }

@@ -5,23 +5,23 @@ using System;
 namespace Awe.Mvc.Core.TagHelpers
 {
     [HtmlTargetElement("bootstrap-alert-close")]
-    public class AlertCloseTagHelper : AweTagHelper<AlertCloseTagHelper>
+    public class AlertCloseTagHelper : TagHelper
     {        
-        public override AlertCloseTagHelper Self
-        {
-            get
-            {
-                return this;
-            }
-        }
+        //public override AlertCloseTagHelper Self
+        //{
+        //    get
+        //    {
+        //        return this;
+        //    }
+        //}
 
         public AlertCloseTagHelper(IServiceProvider serviceProvider)
-                : base(serviceProvider)
+                //: base(serviceProvider)
         {
 
         }
 
-        public override async Task CustomProcessAsync(TagHelperContext context, TagHelperOutput output)
+        public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             TagHelperContent childContentAsync = await output.GetChildContentAsync();
             output.Content.AppendHtml(childContentAsync.GetContent());
@@ -29,6 +29,8 @@ namespace Awe.Mvc.Core.TagHelpers
             output.Attributes.SetAttribute("class", (object)("close " + this.AlertCloseClass));
             output.Attributes.SetAttribute("data-dismiss", (object)"alert");
             output.Attributes.SetAttribute("aria-label", (object)"Close");
+
+            await base.ProcessAsync(context, output);
         }
 
         [HtmlAttributeName("class")]

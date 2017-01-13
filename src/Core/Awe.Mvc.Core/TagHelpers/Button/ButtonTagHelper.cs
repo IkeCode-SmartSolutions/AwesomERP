@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace Awe.Mvc.Core.TagHelpers
 {
@@ -15,23 +17,22 @@ namespace Awe.Mvc.Core.TagHelpers
         {
         }
 
-        public override async Task CustomProcessAsync(TagHelperContext context, TagHelperOutput output)
-        {
-            string str1 = ButtonValue.Length <= 0 ? (await output.GetChildContentAsync()).GetContent() : ButtonValue;
-            string[] array1 = new string[3]
+        readonly string[] allowedButtonElements = new string[3]
             {
                 "a",
                 "button",
                 "input"
             };
-            string[] array2 = new string[3]
-            {
+
+        readonly string[] allowedButtonTypes = new string[3]
+        {
                 "button",
                 "submit",
                 "reset"
-            };
-            string[] array3 = new string[7]
-            {
+        };
+
+        readonly string[] allowedButtonOptions = new string[7]
+        {
                 "default",
                 "primary",
                 "success",
@@ -39,32 +40,70 @@ namespace Awe.Mvc.Core.TagHelpers
                 "warning",
                 "danger",
                 "link"
-            };
-            string[] strArray = new string[4]
-            {
+        };
+
+        readonly string[] allowedButtonSizes = new string[4]
+        {
                 "default",
                 "large",
                 "small",
                 "extrasmall"
-            };
-            string str2 = "";
-            if (Array.IndexOf<string>(array1, ButtonElement) == -1)
+        };
+
+        public override async Task CustomProcessAsync(TagBuilder builder, TagHelperContext context, TagHelperOutput output)
+        {
+            string btnValue = ButtonValue.Length <= 0 ? (await output.GetChildContentAsync()).GetContent() : ButtonValue;
+
+            if (Array.IndexOf<string>(allowedButtonElements, ButtonElement) == -1)
                 throw new ArgumentException("Invalid element! Please, use one of the following HTML elements - 'a', 'button' or 'input'");
-            if (Array.IndexOf<string>(array2, ButtonType) == -1)
+
+            if (Array.IndexOf<string>(allowedButtonTypes, ButtonType) == -1)
                 throw new ArgumentException("Invalid button type! Please, use one of the following types - 'button', 'submit' or 'reset'");
-            if (Array.IndexOf<string>(array3, ButtonOption) == -1)
+
+            if (Array.IndexOf<string>(allowedButtonOptions, ButtonOption) == -1)
                 throw new ArgumentException("Invalid button option! Please, use one of the following options - 'default', 'primary', 'success', 'info', 'warning', 'danger' or 'link'");
-            string str3 = "btn-" + ButtonOption;
+
+            string btnOption = "btn-" + ButtonOption;
+            ButtonClass += $" btn {btnOption}";
+
+            string btnDisabled = "";
             if (ButtonDisabled)
-                str2 = !(ButtonElement == "a") ? "disabled='disabled'" : "disabled";
+                btnDisabled = !(ButtonElement == "a") ? "disabled='disabled'" : "disabled";
+
             string str4;
+
+            var attrs = new Dictionary<string, string>();
+            
             if (ButtonElement == "a")
-                str4 = string.Format("<a href='{0}' target='{1}' role='{2}' class='{3}' id='{4}' autocomplete='{5}' data-loading-text='{6}'>{7}</a>", (object)ButtonLink, (object)ButtonTarget, (object)ButtonType, (object)ButtonClass, (object)ButtonId, (object)ButtonAutocomplete, (object)ButtonLoadingText, (object)str1);
+            {
+                attrs.Add("target", ButtonTarget);
+
+                str4 = string.Format("<a href='{0}' target='{1}' role='{2}' class='{3}' id='{4}' autocomplete='{5}' data-loading-text='{6}'>{7}</a>", (object)ButtonLink, (object)ButtonTarget, (object)ButtonType, (object)ButtonClass, (object)ButtonId, (object)ButtonAutocomplete, (object)ButtonLoadingText, (object)btnValue);
+            }
             else if (ButtonElement == "input")
-                str4 = string.Format("<input type='{0}' class='{1}' {2} value='{3}' id='{4}' autocomplete='{5}' data-loading-text='{6}'/>", (object)ButtonType, (object)ButtonClass, (object)str2, (object)str1, (object)ButtonId, (object)ButtonAutocomplete, (object)ButtonLoadingText);
+            {
+                attrs.Add("value", btnValue);
+                attrs.Add("type", ButtonType);
+                str4 = string.Format("<input type='{0}' class='{1}' {2} value='{3}' id='{4}' autocomplete='{5}' data-loading-text='{6}'/>", (object)ButtonType, (object)ButtonClass, (object)btnDisabled, (object)btnValue, (object)ButtonId, (object)ButtonAutocomplete, (object)ButtonLoadingText);
+            }
             else
-                str4 = string.Format("<button type='{0}' class='{1}' {2}  id='{3}' autocomplete='{4}' data-loading-text='{5}'>{6}</button>", (object)ButtonType, (object)ButtonClass, (object)str2, (object)ButtonId, (object)ButtonAutocomplete, (object)ButtonLoadingText, (object)str1);
-            output.Content.AppendHtml(str4);
+            {
+                attrs.Add("type", ButtonType);
+                str4 = string.Format("<button type='{0}' class='{1}' {2}  id='{3}' autocomplete='{4}' data-loading-text='{5}'>{6}</button>", (object)ButtonType, (object)ButtonClass, (object)btnDisabled, (object)ButtonId, (object)ButtonAutocomplete, (object)ButtonLoadingText, (object)btnValue);
+            }
+
+            attrs.Add("id", ButtonId);
+            attrs.Add("autocomplete", ButtonAutocomplete);
+            attrs.Add("data-loading-text", ButtonLoadingText);
+
+            builder.InnerHtml.Append(btnValue);
+            
+            builder.AddCssClass(ButtonClass);
+            builder.MergeAttributes(attrs);
+
+            output.Content.SetHtmlContent(Builder);
+
+            //output.Content.AppendHtml(str4);
         }
 
         [HtmlAttributeName("element")]
@@ -108,5 +147,57 @@ namespace Awe.Mvc.Core.TagHelpers
 
         [HtmlAttributeName("target")]
         public string ButtonTarget { get; set; }
+
+        public override TagBuilder Builder
+        {
+            get
+            {
+                if (ButtonElement == "a")
+                {
+                    return new TagBuilder("a");
+                }
+                else if (ButtonElement == "input")
+                {
+                    return new TagBuilder("input");
+                }
+                else
+                {
+                    return new TagBuilder("button");
+                }
+            }
+        }
     }
+
+    public enum ButtonElement
+    {
+        Link,
+        Input,
+        Button
+    };
+
+    public enum ButtonType
+    {
+        Button,
+        Submit,
+        Reset
+    };
+
+    public enum ButtonOption
+    {
+        Default,
+        Primary,
+        Success,
+        Info,
+        Warning,
+        Danger,
+        Link
+    }
+
+    public enum ButtonSize
+    {
+        Default,
+        Large,
+        Small,
+        Extrasmall
+    };
 }

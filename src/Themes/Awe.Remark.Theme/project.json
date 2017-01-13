@@ -35,12 +35,15 @@
     "emitEntryPoint": true,
     "preserveCompilationContext": true,
     "embed": [
-      "Theme/Remark/**/*.cshtml",
       "Views/**/*.cshtml",
-      "wwwroot/**/*.*"
-      //"**/*.css"
-      //"**/*.ttf"
-    ]
+      "wwwroot/**/*"
+    ],
+    "compile": {
+      "exclude": [
+        "wwwroot",
+        "node_modules"
+      ]
+    }
   },
 
   "runtimeOptions": {

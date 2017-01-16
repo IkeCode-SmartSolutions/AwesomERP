@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 
-namespace AwesomeErp.Api
+namespace Api
 {
     /// <summary>
     /// 
@@ -34,7 +37,7 @@ namespace AwesomeErp.Api
         public IConfigurationRoot Configuration { get; }
 
         /// <summary>
-        /// This method gets called by the runtime. Use this method to add services to the container.
+        ///  This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
@@ -74,7 +77,7 @@ namespace AwesomeErp.Api
             });
             app.UseSwaggerUi(c =>
             {
-                
+
                 c.RoutePrefix = "api-docs";
                 c.SwaggerEndpoint("/api-docs/v1/definition.json", "Awesome API V1");
             });

@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Awe.Mvc.Core.TagHelpers
@@ -18,12 +16,12 @@ namespace Awe.Mvc.Core.TagHelpers
     {
         protected readonly IServiceProvider ServiceProvider;
 
-        protected readonly IAweOverrideTagHelper<TBaseClass> Overrider;
+        //protected readonly IAweOverrideTagHelper<TBaseClass> Overrider;
 
-        public AweTagHelper(IServiceProvider serviceProvider, IAweOverrideTagHelper<TBaseClass> overrider)
+        public AweTagHelper(IServiceProvider serviceProvider/*, IAweOverrideTagHelper<TBaseClass> overrider*/)
         {
             ServiceProvider = serviceProvider;
-            Overrider = overrider;
+            //Overrider = overrider;
         }
 
         public abstract TBaseClass Self { get; }
@@ -33,9 +31,9 @@ namespace Awe.Mvc.Core.TagHelpers
         
         public sealed override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            var customImplementations = ServiceProvider.GetServices<IAweOverrideTagHelper<TBaseClass>>();
-
             await ProcessAsync(Builder, context, output);
+
+            var customImplementations = ServiceProvider.GetServices<IAweOverrideTagHelper<TBaseClass>>();
 
             if (customImplementations != null & customImplementations.Count() > 0)
             {

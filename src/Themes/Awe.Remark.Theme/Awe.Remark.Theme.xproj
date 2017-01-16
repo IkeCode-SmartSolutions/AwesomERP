@@ -7,11 +7,11 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>cab762c2-7fe6-4483-a23d-85a76a93c607</ProjectGuid>
+    <ProjectGuid>d9a49c1a-d75f-4019-8ff6-030a1f4a8b26</ProjectGuid>
     <RootNamespace>Awe.Remark.Theme</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
   </PropertyGroup>
 
   <PropertyGroup>

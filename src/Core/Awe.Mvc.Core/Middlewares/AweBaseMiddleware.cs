@@ -1,6 +1,7 @@
 ﻿using Awe.Core;
 using Awe.Core.Reflection;
 using Microsoft.Extensions.FileProviders;
+using System;
 using System.Collections.Generic;
 
 namespace Awe.Mvc.Core.Middlewares
@@ -30,7 +31,7 @@ namespace Awe.Mvc.Core.Middlewares
                 if (string.IsNullOrWhiteSpace(ns))
                 {
                     var asmName = moduleAsm.GetName().Name;
-                    throw new BaseComponentLoadException($"'DefaultNamespaceAttribute' was not found on type {asmName}. Consider add attribute on {type.Name} class implementation (e.g. [assembly: DefaultNamespace(nameof({asmName}))])");
+                    throw new BaseComponentLoadException($"'{nameof(DefaultNamespaceAttribute)}' was not found on type {asmName}. Consider add attribute on {type.Name} class implementation (e.g. [assembly: DefaultNamespace(nameof({asmName}))])");
                 }
 
                 var embeddedFileProvider = new EmbeddedFileProvider(moduleAsm, ns);

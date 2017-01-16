@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.DependencyModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Loader;
 using System.Reflection;
 using System.IO;
 using Awe.Core.Crypto;
+using Microsoft.Extensions.DependencyModel;
 using Microsoft.DotNet.PlatformAbstractions;
 
 namespace Awe.Core.Reflection

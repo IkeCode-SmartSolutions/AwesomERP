@@ -2,23 +2,14 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Microsoft.Extensions.FileProviders.Embedded": "1.1.0",
-    "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
-    "Microsoft.AspNetCore.Mvc": "1.1.0",
-    "Autofac.Extensions.DependencyInjection": "4.0.0"
-  },
-
-  "tools": {
+    "Microsoft.DotNet.PlatformAbstractions": "1.1.0",
+    "Microsoft.Extensions.DependencyModel": "1.1.0",
+    "NETStandard.Library": "1.6.0",
+    "System.Runtime.Loader": "4.0.0"
   },
 
   "frameworks": {
-    "netcoreapp1.1": {
-      "dependencies": {
-        "Microsoft.NETCore.App": {
-          "type": "platform",
-          "version": "1.1.0"
-        }
-      },
+    "netstandard1.6": {
       "imports": "dnxcore50"
     }
   }

@@ -3,8 +3,9 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Awe.Mvc.Core.TagHelpers;
 
-namespace Awe.Mvc.Core.TagHelpers
+namespace Awe.Remark.Theme.TagHelpers
 {
     /// <summary>
     /// 

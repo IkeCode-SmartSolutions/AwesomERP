@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:1337/",
-      "sslPort": 44300
+      "applicationUrl": "http://localhost:13378",
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "AwesomeErp": {
+    "Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "http://localhost:5000/api/values",

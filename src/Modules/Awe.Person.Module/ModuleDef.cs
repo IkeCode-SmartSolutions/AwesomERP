@@ -1,5 +1,5 @@
-﻿using Awe.Menu;
-using Awe.Menu.Service;
+﻿//using Awe.Menu;
+//using Awe.Menu.Service;
 using Awe.Module.Core;
 using System;
 
@@ -8,17 +8,17 @@ namespace Awe.Person.Module
 {
     public class ModuleDef : IAweModule
     {
-        private IAweMenuService _menuService;
-        public ModuleDef(IAweMenuService menuService)
+        //private IAweMenuService _menuService;
+        public ModuleDef(/*IAweMenuService menuService*/)
         {
-            _menuService = menuService;
-            menuService.RegisterMenu(new AweMenu
-            {
-                Id = 1,
-                Title = "Teste 01",
-                Order = 1,
-                RouteUrl = "/testeurl"
-            });
+            //_menuService = menuService;
+            //menuService.RegisterMenu(new AweMenu
+            //{
+            //    Id = 1,
+            //    Title = "Teste 01",
+            //    Order = 1,
+            //    RouteUrl = "/testeurl"
+            //});
         }
 
         public string Name { get { return "Pessoas"; } }

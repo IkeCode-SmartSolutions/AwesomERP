@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AwesomeErp.Api.Controllers
+namespace Api.Controllers
 {
     /// <summary>
-    /// asd
+    /// 
     /// </summary>
     [Route("api/[controller]")]
     public class ValuesController : Controller
@@ -13,7 +16,6 @@ namespace AwesomeErp.Api.Controllers
         /// GET api/values
         /// </summary>
         /// <returns></returns>
-        [Produces(typeof(string))]
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -21,7 +23,7 @@ namespace AwesomeErp.Api.Controllers
         }
 
         /// <summary>
-        ///  GET api/values/5
+        /// GET api/values/5
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

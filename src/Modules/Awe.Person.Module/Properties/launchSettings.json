@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:51077/",
+      "applicationUrl": "http://localhost:52015/",
       "sslPort": 0
     }
   },
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "PersonComponent": {
+    "Awe.Person.Module": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "http://localhost:5000",

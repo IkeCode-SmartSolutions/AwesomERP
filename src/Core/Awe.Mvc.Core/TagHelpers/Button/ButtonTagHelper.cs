@@ -1,5 +1,4 @@
-﻿using Autofac;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -31,8 +30,8 @@ namespace Awe.Mvc.Core.TagHelpers
             }
         }
 
-        public ButtonTagHelper(IServiceProvider serviceProvider, IAweOverrideTagHelper<ButtonTagHelper> overrider)
-            : base(serviceProvider, overrider)
+        public ButtonTagHelper(IServiceProvider serviceProvider/*, IAweOverrideTagHelper<ButtonTagHelper> overrider*/)
+            : base(serviceProvider/*, overrider*/)
         {
         }
 

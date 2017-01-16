@@ -1,61 +1,52 @@
 {
   "dependencies": {
-    "Awe.Menu.Component": "1.0.0-*",
     "Awe.Menu.Service": "1.0.0-*",
-    "Awe.Module.Core": "1.0.0-*",
-    "Awe.Core": "1.0.0-*",
-    "TodoViewComponent": "1.0.0-*",
-    "Awe.Remark.Theme": "1.0.0-*",
+    "Awe.Mvc.Core": "1.0.0-*",
     "Awe.Person.Module": "1.0.0-*",
+    "Awe.Remark.Theme": "1.0.0-*",
     "Awe.Theme.Core": "1.0.0-*",
-    "Autofac.Extensions.DependencyInjection": "4.0.0"
+    "Awe.Todo.Component": "1.0.0-*",
+    "Microsoft.AspNetCore.Diagnostics": "1.0.0",
+    "Microsoft.AspNetCore.Mvc": "1.1.0",
+    "Microsoft.AspNetCore.Razor.Tools": {
+      "version": "1.0.0-preview2-final",
+      "type": "build"
+    },
+    "Microsoft.AspNetCore.Routing": "1.1.0",
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
+    "Microsoft.AspNetCore.StaticFiles": "1.1.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
+    "Microsoft.Extensions.Logging": "1.0.0",
+    "Microsoft.Extensions.Logging.Console": "1.0.0",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0",
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
+    "Microsoft.NETCore.App": {
+      "version": "1.0.1",
+      "type": "platform"
+    },
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
   },
 
   "tools": {
-    "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final"
+    "BundlerMinifier.Core": "2.0.238",
+    "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final",
+    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
   },
 
   "frameworks": {
-    "netcoreapp1.1": {
-      "dependencies": {
-        "BundlerMinifier.Core": "2.2.306",
-        "Microsoft.AspNetCore.Diagnostics": "1.1.0",
-        "Microsoft.AspNetCore.Mvc": "1.1.0",
-        "Microsoft.AspNetCore.Razor.Runtime": "1.1.0",
-        "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
-        "Microsoft.AspNetCore.Routing": "1.1.0",
-        "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
-        "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final",
-        "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
-        "Microsoft.AspNetCore.StaticFiles": "1.1.0",
-        "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
-        "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
-        "Microsoft.Extensions.Configuration.Json": "1.1.0",
-        "Microsoft.Extensions.FileProviders.Embedded": "1.1.0",
-        "Microsoft.Extensions.Logging": "1.1.0",
-        "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
-        "Microsoft.Extensions.Logging.Console": "1.1.0",
-        "Microsoft.Extensions.Logging.Debug": "1.1.0",
-        "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-        "Microsoft.NETCore.App": {
-          "type": "platform",
-          "version": "1.1.0"
-        },
-        "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0"
-      },
-      "imports": "dnxcore50"
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
     }
   },
 
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true,
-    "compile": {
-      "exclude": [
-        "wwwroot",
-        "node_modules"
-      ]
-    }
+    "preserveCompilationContext": true
   },
 
   "runtimeOptions": {

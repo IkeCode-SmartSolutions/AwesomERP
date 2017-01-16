@@ -35,7 +35,7 @@ namespace Site
         public IContainer ApplicationContainer { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             //var connection = @"Server=.\SQLEXPRESS;Database=AwesomeErp;Trusted_Connection=True;";
             //services.AddDbContext<MenuContext>(options => options.UseSqlServer(connection));
@@ -50,6 +50,19 @@ namespace Site
             services.AddTransient<IAweOverrideTagHelper<ButtonTagHelper>, RemarkButtonTagHelper>();
 
             services.AddSingleton<IAweMenuService, AweMenuService>();
+
+
+
+            var builder = new ContainerBuilder();
+
+            builder.Populate(services);
+
+            builder.RegisterType<RemarkButtonTagHelper>().As<IAweOverrideTagHelper<ButtonTagHelper>>();
+
+            builder.RegisterType<AweMenuService>().As<IAweMenuService>();
+
+            var container = builder.Build();
+            return container.Resolve<IServiceProvider>();
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,10 +115,6 @@ namespace Site
                         name: "default",
                         template: "{controller=Home}/{action=Index}/{id?}");
                 });
-
-            // If you want to dispose of resources that have been resolved in the
-            // application container, register for the "ApplicationStopped" event.
-            appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Awe.Mvc.Core.TagHelpers
     /// 
     /// </summary>
     [HtmlTargetElement("bootstrap-button")]
-    public class RemarkButtonTagHelper : TagHelper, IAweOverrideTagHelper<ButtonTagHelper>
+    public class RemarkButtonTagHelper : IAweOverrideTagHelper<ButtonTagHelper>
     {
         /// <summary>
         /// 
@@ -33,11 +33,7 @@ namespace Awe.Mvc.Core.TagHelpers
 
             builder.Attributes.Add("data-customadd", "true");
 
-            //var a = output.Content.IsModified ? output.Content.GetContent() : (await output.GetChildContentAsync()).GetContent();
-
-            await baseClassInstance.CustomProcessAsync(context, output);
-
-            //var childContent = output.Content.IsModified ? output.Content.GetContent() : (await output.GetChildContentAsync()).GetContent()
+            var childContent = output.Content.IsModified ? output.Content.GetContent() : (await output.GetChildContentAsync()).GetContent();
         }
     }
 }

@@ -18,29 +18,33 @@ namespace Awe.Mvc.Core.TagHelpers
     {
         protected readonly IServiceProvider ServiceProvider;
 
-        public AweTagHelper(IServiceProvider serviceProvider)
+        protected readonly IAweOverrideTagHelper<TBaseClass> Overrider;
+
+        public AweTagHelper(IServiceProvider serviceProvider, IAweOverrideTagHelper<TBaseClass> overrider)
         {
             ServiceProvider = serviceProvider;
+            Overrider = overrider;
         }
 
         public abstract TBaseClass Self { get; }
         public abstract TagBuilder Builder { get; }
 
-        public abstract Task CustomProcessAsync(TagBuilder builder, TagHelperContext context, TagHelperOutput output);
+        public abstract Task ProcessAsync(TagBuilder builder, TagHelperContext context, TagHelperOutput output);
         
         public sealed override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            var customImplementation = ServiceProvider.GetService<IAweOverrideTagHelper<TBaseClass>>();
-            
-            if (customImplementation != null)
-            {
-                customImplementation.CustomProcess(Self, Builder, context, output);
-            }
-            else
-            {
-                await CustomProcessAsync(Builder, context, output);
-            }
+            var customImplementations = ServiceProvider.GetServices<IAweOverrideTagHelper<TBaseClass>>();
 
+            await ProcessAsync(Builder, context, output);
+
+            if (customImplementations != null & customImplementations.Count() > 0)
+            {
+                foreach (var impl in customImplementations)
+                {
+                    impl.CustomProcess(Self, Builder, context, output);
+                }
+            }
+            
             await base.ProcessAsync(context, output);
         }
     }

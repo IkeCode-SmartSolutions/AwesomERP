@@ -12,45 +12,31 @@ namespace Awe.Mvc.Core.TagHelpers
     {
         public override ButtonTagHelper Self { get { return this; } }
 
-        public ButtonTagHelper(IServiceProvider serviceProvider)
-            : base(serviceProvider)
+        public override TagBuilder Builder
+        {
+            get
+            {
+                if (ButtonElement == "a")
+                {
+                    return new TagBuilder("a");
+                }
+                else if (ButtonElement == "input")
+                {
+                    return new TagBuilder("input");
+                }
+                else
+                {
+                    return new TagBuilder("button");
+                }
+            }
+        }
+
+        public ButtonTagHelper(IServiceProvider serviceProvider, IAweOverrideTagHelper<ButtonTagHelper> overrider)
+            : base(serviceProvider, overrider)
         {
         }
 
-        readonly string[] allowedButtonElements = new string[3]
-            {
-                "a",
-                "button",
-                "input"
-            };
-
-        readonly string[] allowedButtonTypes = new string[3]
-        {
-                "button",
-                "submit",
-                "reset"
-        };
-
-        readonly string[] allowedButtonOptions = new string[7]
-        {
-                "default",
-                "primary",
-                "success",
-                "info",
-                "warning",
-                "danger",
-                "link"
-        };
-
-        readonly string[] allowedButtonSizes = new string[4]
-        {
-                "default",
-                "large",
-                "small",
-                "extrasmall"
-        };
-
-        public override async Task CustomProcessAsync(TagBuilder builder, TagHelperContext context, TagHelperOutput output)
+        public override async Task ProcessAsync(TagBuilder builder, TagHelperContext context, TagHelperOutput output)
         {
             string btnValue = ButtonValue.Length <= 0 ? (await output.GetChildContentAsync()).GetContent() : ButtonValue;
 
@@ -101,10 +87,12 @@ namespace Awe.Mvc.Core.TagHelpers
             builder.AddCssClass(ButtonClass);
             builder.MergeAttributes(attrs);
 
-            output.Content.SetHtmlContent(Builder);
+            output.Content.SetHtmlContent(builder);
 
             //output.Content.AppendHtml(str4);
         }
+
+        #region Properties
 
         [HtmlAttributeName("element")]
         public string ButtonElement { get; set; }
@@ -148,24 +136,40 @@ namespace Awe.Mvc.Core.TagHelpers
         [HtmlAttributeName("target")]
         public string ButtonTarget { get; set; }
 
-        public override TagBuilder Builder
-        {
-            get
+        readonly string[] allowedButtonElements = new string[3]
             {
-                if (ButtonElement == "a")
-                {
-                    return new TagBuilder("a");
-                }
-                else if (ButtonElement == "input")
-                {
-                    return new TagBuilder("input");
-                }
-                else
-                {
-                    return new TagBuilder("button");
-                }
-            }
-        }
+                "a",
+                "button",
+                "input"
+            };
+
+        readonly string[] allowedButtonTypes = new string[3]
+        {
+                "button",
+                "submit",
+                "reset"
+        };
+
+        readonly string[] allowedButtonOptions = new string[7]
+        {
+                "default",
+                "primary",
+                "success",
+                "info",
+                "warning",
+                "danger",
+                "link"
+        };
+
+        readonly string[] allowedButtonSizes = new string[4]
+        {
+                "default",
+                "large",
+                "small",
+                "extrasmall"
+        };
+
+        #endregion Properties
     }
 
     public enum ButtonElement

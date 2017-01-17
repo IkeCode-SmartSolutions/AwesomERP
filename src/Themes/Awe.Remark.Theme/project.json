@@ -1,9 +1,9 @@
-﻿{
+{
   "dependencies": {
     "Awe.Module.Core": "1.0.0-*",
     "Awe.Mvc.Core": "1.0.0-*",
     "Awe.Theme.Core": "1.0.0-*",
-    "Microsoft.AspNetCore.Diagnostics": "1.0.0",
+    "Microsoft.AspNetCore.Diagnostics": "1.1.0",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
     "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.1.0",
     "Microsoft.AspNetCore.Razor.Runtime": "1.1.0",

@@ -2,5 +2,6 @@
 {
     public interface IAweModule : IAweComponent
     {
+        string MenuCategoryTitle { get; }
     }
 }

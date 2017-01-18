@@ -6,28 +6,32 @@ namespace Awe.Menu
 {
     public class AweMenu
     {
-        public AweMenu()
+        private AweMenu(string parent, string title, string hint, int order = 0, string icon = "")
         {
+            Parent = parent;
+            Title = title;
+            Hint = hint;
+            Order = order;
+            Icon = icon;
         }
-        
-        public int Id { get; set; }
-        public int? ParentId { get; set; }
-        [Required]
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string Hint { get; set; }
-        public int Order { get; set; }
-        [Required]
-        public string RouteUrl { get; set; }
-        public string Icon { get; set; }
 
-        public List<AweMenu> Children { get; set; }
-        public AweMenu Parent { get; set; }
-
-        public string GetSignature()
+        public AweMenu(string routeName, string parent, string title, string hint, int order = 0, string icon = "")
+            : this(parent, title, hint, order, icon)
         {
-            var key = $"{Id}_{Title}_{RouteUrl}";
-            return CryptoTools.CalculateMD5Hash(key);
+            RouteName = routeName;
         }
+
+        public AweMenu(string controller, string action, string parent, string title, string hint, int order = 0, string icon = "")
+            : this(parent, title, hint, order, icon)
+        {
+            RouteName = $"${controller}#{action}";
+        }
+
+        public string Parent { get; private set; }
+        public string Title { get; private set; }
+        public string Hint { get; private set; }
+        public int Order { get; private set; }
+        public string RouteName { get; private set; }
+        public string Icon { get; private set; }
     }
 }

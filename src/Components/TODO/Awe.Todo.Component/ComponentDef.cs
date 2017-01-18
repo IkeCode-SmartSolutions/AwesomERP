@@ -9,5 +9,13 @@ namespace Awe.Todo.Component
         public string Description { get { return "TODO component description"; } }
 
         public string Name { get { return "TODO"; } }
+
+        public int? Order
+        {
+            get
+            {
+                return 0;
+            }
+        }
     }
 }

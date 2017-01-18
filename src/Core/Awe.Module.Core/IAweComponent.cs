@@ -5,5 +5,6 @@
     {
         string Name { get; }
         string Description { get; }
+        int? Order { get; }
     }
 }

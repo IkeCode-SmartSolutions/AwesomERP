@@ -1,22 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-//using Awe.Menu.Service;
+using System;
 
 namespace Awe.Person.Module.Controllers
 {
-    [Route("Pessoa/Dashboard", Name = "Awe.Person.Module.Dashboard")]
+    [Route("Pessoa")]
     public class DashboardController : Controller
     {
-        //private readonly IAweMenuService _menuService;
-        public DashboardController(/*IAweMenuService menuService*/)
+        public DashboardController()
         {
-            //_menuService = menuService;
         }
 
-        //[Menu("Pessoa", "Dashboard")]
+        [Menu(null, "Dashboard")]
+        [Route("Dashboard", Name = "Awe.Person.Module.Dashboard")]
         public IActionResult Index()
         {
-
-            return View();
+            return View("/Views/Person/Dashboard/Index.cshtml");
         }
     }
 }

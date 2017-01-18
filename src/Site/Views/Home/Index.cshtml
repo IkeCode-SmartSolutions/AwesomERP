@@ -1,7 +1,9 @@
-﻿@{ 
+﻿@{
     ViewData["Title"] = "Página Inicial";
 }
 
 <div class="row">
     @await Component.InvokeAsync("ViewComponents.Todo", new { number = 5 })
+
+    <a asp-route="Awe.Person.Module.Dashboard">Dashboard</a>
 </div>

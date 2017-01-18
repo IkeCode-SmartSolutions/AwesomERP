@@ -7,6 +7,14 @@ using Awe.Menu.Service;
 using Awe.Mvc.Core.TagHelpers;
 using Awe.Mvc.Core;
 using Awe.Module.Core;
+using Awe.Remark.Theme.TagHelpers;
+using Awe.Core.Reflection;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.PlatformAbstractions;
+using System.Linq;
+using System.Reflection;
+using Awe.Menu;
+using Microsoft.AspNetCore.Routing;
 
 namespace Site
 {
@@ -34,13 +42,14 @@ namespace Site
 
             services.RegisterModulesRazorView();
 
-            //services.AddTransient<IAweOverrideTagHelper<ButtonTagHelper>, RemarkButtonTagHelper>();
+            services.AddTransient<IAweOverrideTagHelper<ButtonTagHelper>, RemarkButtonTagHelper>();
 
+            services.AddSingleton<IRouteBuilder, RouteBuilder>();
             services.AddSingleton<IAweMenuService, AweMenuService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IAweMenuService menuService)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -65,6 +74,8 @@ namespace Site
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.RegisterMenus();
         }
     }
 }

@@ -9,5 +9,13 @@ namespace Awe.Remark.Theme
         public string Description { get { return "Awe.Theme.Core description"; } }
 
         public string Name { get { return "Awe.Theme.Core"; } }
+
+        public int? Order
+        {
+            get
+            {
+                return 0;
+            }
+        }
     }
 }

@@ -4,8 +4,7 @@ namespace Awe.Menu.Service
 {
     public interface IAweMenuService
     {
-        ICollection<AweMenu> RegisteredMenus { get; }
-        void RegisterMenu(AweMenu menu);
-        void UnregisterMenu(AweMenu menu);
+        Dictionary<int, AweMenu> RegisteredMenus { get; }
+        void RegisterMenu(int order, AweMenu menu);
     }
 }

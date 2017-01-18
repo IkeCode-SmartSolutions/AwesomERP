@@ -1,6 +1,8 @@
 ﻿using Awe.Module.Core;
 using Awe.Mvc.Core.Middlewares;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 
@@ -45,6 +47,18 @@ namespace Awe.Mvc.Core
             instance.Invoke<IAweTheme>();
 
             return services;
+        }
+
+        public static IApplicationBuilder RegisterMenus(this IApplicationBuilder app, string folderPath = "")
+        {
+            if (string.IsNullOrWhiteSpace(folderPath))
+                folderPath = PlatformServices.Default.Application.ApplicationBasePath;
+
+            var instance = AweModulesMenusRegister.CreateInstance(app, folderPath);
+
+            instance.Invoke<Controller>();
+
+            return app;
         }
     }
 }

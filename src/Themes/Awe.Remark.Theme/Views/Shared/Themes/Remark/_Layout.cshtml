@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "_Layout";
 }
+@inject Awe.Menu.Service.IAweMenuService menuService
 
 @section styles{
     <link rel="stylesheet" href="/wwwroot/themes/remark/classic/global/css/bootstrap.min.css" />
@@ -129,6 +130,30 @@
                         </ul>
                     </li>
                     <!-- End Site Menu Item With Sub-->
+                    <!-- GERADO PELO MENU SERVICE -->
+
+                    @{
+                        var menus = menuService.RegisteredMenus.ToDictionary(i => i.Key, i => i.Value.GroupBy(g => g.Parent).ToList());
+                    }
+                    @foreach (var menu in menus)
+                    {
+                        <li class="site-menu-category">@menu.Key</li>
+                        
+                        foreach (var subMenu in menu.Value)
+                        {
+                            foreach (var item in subMenu)
+                            {
+                                <li class="site-menu-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" class="animsition-link">
+                                        <span class="site-menu-title">@item.Title</span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    }
+
+                    <!-- /GERADO PELO MENU SERVICE -->
+
                 </ul>
 
                 <div class="site-menubar-section">

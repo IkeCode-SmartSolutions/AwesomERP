@@ -5,7 +5,7 @@ namespace Site.Controllers
 {
     public class HomeController : Controller
     {
-        [Menu("Geral", -1, null, "Home")]
+        [Menu("", -1, null, "Home", icon: "wb-dashboard")]
         public IActionResult Index()
         {
             return View();

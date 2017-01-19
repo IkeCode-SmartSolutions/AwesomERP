@@ -10,7 +10,7 @@ namespace Awe.Menu.Service
         
         public void RegisterMenu(int categoryOrder, string categoryName, AweMenu menu)
         {
-            categoryName = string.IsNullOrWhiteSpace(categoryName) ? "Outros" : categoryName;
+            categoryName = categoryName == null ? "Outros" : categoryName;
 
             var category = new AweMenuCategory(categoryOrder, categoryName);
 

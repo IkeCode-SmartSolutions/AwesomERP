@@ -10,7 +10,7 @@ namespace Awe.Person.Module.Controllers
         {
         }
 
-        [Menu(null, "Dashboard")]
+        [Menu(null, "Dashboard", icon: "fa fa-users")]
         [Route("Dashboard", Name = "Awe.Person.Module.Dashboard")]
         public IActionResult Index()
         {

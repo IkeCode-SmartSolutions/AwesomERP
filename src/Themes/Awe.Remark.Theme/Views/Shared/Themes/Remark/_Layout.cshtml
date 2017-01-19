@@ -1,7 +1,6 @@
 ﻿@{
     Layout = "_Layout";
 }
-@inject Awe.Menu.Service.IAweMenuService menuService
 
 @section styles{
     <link rel="stylesheet" href="/wwwroot/themes/remark/classic/global/css/bootstrap.min.css" />
@@ -86,107 +85,7 @@
 </div>
 
 
-<div class="site-menubar">
-    <div class="site-menubar-body">
-        <div>
-            <div>
-                <ul class="site-menu" data-plugin="menu">
-                    <!-- Menu Category-->
-                    <li class="site-menu-category">Geral</li>
-                    <!-- End Menu Category-->
-                    <!-- Site Menu Item-->
-
-                    <li class="site-menu-item">
-                        <a asp-area="" asp-controller="Home" asp-action="Index" class="animsition-link">
-                            <span class="site-menu-title">Home</span>
-                        </a>
-                    </li>
-                    <li class="site-menu-item">
-                        <a asp-area="" asp-route="Awe.Person.Module.Dashboard" class="animsition-link">
-                            <span class="site-menu-title">Pessoa</span>
-                        </a>
-                    </li>
-                    <!-- End Site Menu Item-->
-                    <!-- Site Menu Item With Sub-->
-                    <li class="site-menu-category">Outros</li>
-                    <li class="site-menu-item has-sub">
-                        <a href="javascript:void(0)">
-                            <span class="site-menu-title">
-                                Ajuda
-                            </span>
-                            <span class="site-menu-arrow"></span>
-                        </a>
-                        <ul class="site-menu-sub">
-                            <li class="site-menu-item">
-                                <a asp-area="" asp-controller="Home" asp-action="About" class="animsition-link">
-                                    <span class="site-menu-title">Sobre</span>
-                                </a>
-                            </li>
-                            <li class="site-menu-item">
-                                <a asp-area="" asp-controller="Home" asp-action="Contact" class="animsition-link">
-                                    <span class="site-menu-title">Contato</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- End Site Menu Item With Sub-->
-                    <!-- GERADO PELO MENU SERVICE -->
-
-                    @{
-                        var menus = menuService.RegisteredMenus.ToDictionary(i => i.Key, i => i.Value.GroupBy(g => g.Parent).ToList());
-                    }
-                    @foreach (var menu in menus)
-                    {
-                        <li class="site-menu-category">@menu.Key</li>
-                        
-                        foreach (var subMenu in menu.Value)
-                        {
-                            foreach (var item in subMenu)
-                            {
-                                <li class="site-menu-item">
-                                    <a asp-area="" asp-controller="Home" asp-action="Index" class="animsition-link">
-                                        <span class="site-menu-title">@item.Title</span>
-                                    </a>
-                                </li>
-                            }
-                        }
-                    }
-
-                    <!-- /GERADO PELO MENU SERVICE -->
-
-                </ul>
-
-                <div class="site-menubar-section">
-                    <h5>
-                        Milestone
-                        <span class="pull-xs-right">30%</span>
-                    </h5>
-                    <div class="progress progress-xs">
-                        <div class="progress-bar active" style="width: 30%;" role="progressbar"></div>
-                    </div>
-                    <h5>
-                        Release
-                        <span class="pull-xs-right">60%</span>
-                    </h5>
-                    <div class="progress progress-xs">
-                        <div class="progress-bar progress-bar-warning" style="width: 60%;" role="progressbar"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="site-menubar-footer">
-        <a href="javascript: void(0);" class="fold-show" data-placement="top" data-toggle="tooltip" data-original-title="Settings">
-            <span class="icon wb-settings" aria-hidden="true"></span>
-        </a>
-        <a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Lock">
-            <span class="icon wb-eye-close" aria-hidden="true"></span>
-        </a>
-        <a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Logout">
-            <span class="icon wb-power" aria-hidden="true"></span>
-        </a>
-    </div>
-</div>
+@{ await Html.RenderPartialAsync("Themes/Remark/_MenuHolder"); }
 
 @section scripts{
 

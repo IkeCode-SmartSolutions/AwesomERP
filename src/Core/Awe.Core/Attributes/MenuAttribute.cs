@@ -1,13 +1,26 @@
 ﻿namespace System
 {
+    /// <summary>
+    /// Menu Attribute to configure a menu to be automatically loaded on application start
+    /// </summary>
     public class MenuAttribute : Attribute
     {
+        private string _category;
         private string _parent;
         private string _title;
         private int _order;
         private string _icon;
         private string _hint;
 
+        /// <summary>
+        /// Configure a menu to be automatically loaded on application start.
+        /// It's try to get Menu Category Title from IAweModule.MenuCategoryTitle 
+        /// </summary>
+        /// <param name="parent">Parent menu key</param>
+        /// <param name="title">Displayed title</param>
+        /// <param name="hint">Help text on mouse over, if null or empty assumes Title</param>
+        /// <param name="order">Position on related parent children list</param>
+        /// <param name="icon">Menu icon</param>
         public MenuAttribute(string parent, string title, string hint = "", int order = 0, string icon = "")
         {
             _parent = parent;
@@ -16,6 +29,23 @@
             _icon = icon;
             _hint = string.IsNullOrWhiteSpace(hint) ? title : hint;
         }
+
+        /// <summary>
+        /// Configure a menu to be automatically loaded on application start.
+        /// </summary>
+        /// <param name="category">Menu Category key</param>
+        /// <param name="parent">Parent menu key</param>
+        /// <param name="title">Displayed title</param>
+        /// <param name="hint">Help text on mouse over, if null or empty assumes Title</param>
+        /// <param name="order">Position on related parent children list</param>
+        /// <param name="icon">Menu icon</param>
+        public MenuAttribute(string category, string parent, string title, string hint = "", int order = 0, string icon = "")
+            : this(parent, title, hint, order, icon)
+        {
+            _category = category;
+        }
+
+        public string Category { get { return _category; } }
 
         public string Parent { get { return _parent; } }
 

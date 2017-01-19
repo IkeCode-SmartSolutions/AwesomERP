@@ -6,6 +6,8 @@ namespace Awe.Menu.Service
     {
         Dictionary<string, List<AweMenu>> RegisteredMenus { get; }
 
-        void RegisterMenu(string categoryName, List<AweMenu> menus);
+        void RegisterMenu(string categoryName, AweMenu menu);
+
+        Dictionary<string, List<AweMenu>> BuildMenu();
     }
 }

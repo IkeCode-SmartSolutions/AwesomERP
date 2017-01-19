@@ -16,6 +16,6 @@ namespace Awe.Person.Module
 
         public int? Order { get { return 0; } }
 
-        public string MenuCategoryTitle { get { return "Pessoas"; } }
+        public string RootMenuDefaultTitle { get { return "Pessoas"; } }
     }
 }

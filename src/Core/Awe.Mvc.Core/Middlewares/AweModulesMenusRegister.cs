@@ -40,9 +40,7 @@ namespace Awe.Mvc.Core.Middlewares
                 foreach (var asm in asms)
                 {
                     var moduleType = asm.GetTypes().FirstOrDefault(i => !i.GetTypeInfo().IsInterface && tModule.IsAssignableFrom(i));
-                    var categoryTitle = moduleType != null ? ((IAweModule)Activator.CreateInstance(moduleType)).MenuCategoryTitle : null;
-
-                    var menus = new List<AweMenu>();
+                    var rootMenuDefaultTitle = moduleType != null ? ((IAweModule)Activator.CreateInstance(moduleType)).RootMenuDefaultTitle : null;
 
                     var controllers = asm.GetTypes().Where(i => !i.GetTypeInfo().IsInterface
                                                                 && t.IsAssignableFrom(i))
@@ -60,8 +58,10 @@ namespace Awe.Mvc.Core.Middlewares
                         {
                             var menuAttr = method.GetCustomAttribute<MenuAttribute>();
                             var routeAttr = method.GetCustomAttribute<RouteAttribute>();
-
+                            
                             AweMenu menu;
+
+                            var category = string.IsNullOrWhiteSpace(rootMenuDefaultTitle) ? menuAttr.Category : rootMenuDefaultTitle;
 
                             if (routeAttr == null)
                             {
@@ -71,15 +71,11 @@ namespace Awe.Mvc.Core.Middlewares
                             {
                                 menu = new AweMenu(routeAttr.Name, menuAttr.Parent, menuAttr.Title, menuAttr.Hint, menuAttr.Order, menuAttr.Icon);
                             }
-
-                            menus.Add(menu);
+                            
+                            menuService.RegisterMenu(category, menu);
                         }
                     }
-
-                    menuService.RegisterMenu(categoryTitle, menus);
                 }
-
-                var a = menuService.RegisteredMenus.ToDictionary(i => i.Key, i => i.Value.GroupBy(g => g.Parent).ToList());
             }
 
             return ReturnObj;

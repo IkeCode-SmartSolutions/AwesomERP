@@ -5,7 +5,7 @@
     "Microsoft.DotNet.PlatformAbstractions": "1.1.0",
     "Microsoft.Extensions.DependencyModel": "1.1.0",
     "NETStandard.Library": "1.6.0",
-    "System.Runtime.Loader": "4.0.0"
+    "System.Runtime.Loader": "4.3.0"
   },
 
   "frameworks": {

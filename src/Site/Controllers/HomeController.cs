@@ -5,7 +5,7 @@ namespace Site.Controllers
 {
     public class HomeController : Controller
     {
-        [Menu(null, "Home")]
+        [Menu(category: "Geral", parent: null, title: "Home")]
         public IActionResult Index()
         {
             return View();

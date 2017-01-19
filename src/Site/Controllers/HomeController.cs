@@ -5,13 +5,13 @@ namespace Site.Controllers
 {
     public class HomeController : Controller
     {
-        [Menu(category: "Geral", parent: null, title: "Home")]
+        [Menu("Geral", -1, null, "Home")]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Menu("Ajuda", "Sobre")]
+        [Menu("Ajuda", 9999, null, "Sobre")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -19,7 +19,7 @@ namespace Site.Controllers
             return View();
         }
 
-        [Menu("Ajuda", "Contato")]
+        [Menu("Ajuda", 9999, null, "Contato")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

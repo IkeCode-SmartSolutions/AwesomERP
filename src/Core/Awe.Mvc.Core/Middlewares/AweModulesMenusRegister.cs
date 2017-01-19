@@ -40,7 +40,10 @@ namespace Awe.Mvc.Core.Middlewares
                 foreach (var asm in asms)
                 {
                     var moduleType = asm.GetTypes().FirstOrDefault(i => !i.GetTypeInfo().IsInterface && tModule.IsAssignableFrom(i));
-                    var rootMenuDefaultTitle = moduleType != null ? ((IAweModule)Activator.CreateInstance(moduleType)).RootMenuDefaultTitle : null;
+
+                    var module = CreateModuleInstance(moduleType);
+
+                    var rootMenuDefaultTitle = module?.RootMenuDefaultTitle;
 
                     var controllers = asm.GetTypes().Where(i => !i.GetTypeInfo().IsInterface
                                                                 && t.IsAssignableFrom(i))
@@ -58,7 +61,7 @@ namespace Awe.Mvc.Core.Middlewares
                         {
                             var menuAttr = method.GetCustomAttribute<MenuAttribute>();
                             var routeAttr = method.GetCustomAttribute<RouteAttribute>();
-                            
+
                             AweMenu menu;
 
                             var category = string.IsNullOrWhiteSpace(rootMenuDefaultTitle) ? menuAttr.Category : rootMenuDefaultTitle;
@@ -71,14 +74,21 @@ namespace Awe.Mvc.Core.Middlewares
                             {
                                 menu = new AweMenu(routeAttr.Name, menuAttr.Parent, menuAttr.Title, menuAttr.Hint, menuAttr.Order, menuAttr.Icon);
                             }
-                            
-                            menuService.RegisterMenu(category, menu);
+
+                            var categoryOrder = module?.Order ?? menuAttr.CategoryOrder ?? 9999;
+
+                            menuService.RegisterMenu(categoryOrder, category, menu);
                         }
                     }
                 }
             }
 
             return ReturnObj;
+        }
+
+        private static IAweModule CreateModuleInstance(Type moduleType)
+        {
+            return moduleType != null ? ((IAweModule)Activator.CreateInstance(moduleType)) : null;
         }
     }
 }

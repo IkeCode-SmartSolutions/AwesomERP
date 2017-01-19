@@ -6,6 +6,7 @@
     public class MenuAttribute : Attribute
     {
         private string _category;
+        private int? _categoryOrder;
         private string _parent;
         private string _title;
         private int _order;
@@ -39,13 +40,16 @@
         /// <param name="hint">Help text on mouse over, if null or empty assumes Title</param>
         /// <param name="order">Position on related parent children list</param>
         /// <param name="icon">Menu icon</param>
-        public MenuAttribute(string category, string parent, string title, string hint = "", int order = 0, string icon = "")
+        public MenuAttribute(string category, int categoryOrder, string parent, string title, string hint = "", int order = 0, string icon = "")
             : this(parent, title, hint, order, icon)
         {
             _category = category;
+            _categoryOrder = categoryOrder;
         }
 
         public string Category { get { return _category; } }
+
+        public int? CategoryOrder { get { return _categoryOrder; } }
 
         public string Parent { get { return _parent; } }
 

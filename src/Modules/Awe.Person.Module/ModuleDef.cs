@@ -14,7 +14,7 @@ namespace Awe.Person.Module
 
         public string Description { get { return "Módulo de Pessoas [descrição...]"; } }
 
-        public int? Order { get { return 0; } }
+        public int? Order { get { return 1; } }
 
         public string RootMenuDefaultTitle { get { return "Pessoas"; } }
     }

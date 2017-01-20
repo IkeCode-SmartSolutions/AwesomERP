@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Awe.Menu
 {
-    public class AweMenu
+    public class AweMenuItem
     {
         public string Parent { get; set; }
         public string Title { get; set; }
@@ -39,14 +39,14 @@ namespace Awe.Menu
         }
 
         public string Icon { get; set; }
-        public List<AweMenu> Children { get; set; }
+        public List<AweMenuItem> Children { get; set; }
 
-        public AweMenu()
+        public AweMenuItem()
         {
 
         }
 
-        public AweMenu(AweMenu menu)
+        public AweMenuItem(AweMenuItem menu)
         {
             Parent = menu.Parent;
             Title = menu.Title;
@@ -57,7 +57,7 @@ namespace Awe.Menu
             Children = menu.Children;
         }
 
-        private AweMenu(string parent, string title, string hint, int order = 0, string icon = "")
+        private AweMenuItem(string parent, string title, string hint, int order = 0, string icon = "")
         {
             Parent = parent;
             Title = title;
@@ -66,13 +66,13 @@ namespace Awe.Menu
             Icon = icon;
         }
 
-        public AweMenu(string routeName, string parent, string title, string hint, int order = 0, string icon = "")
+        public AweMenuItem(string routeName, string parent, string title, string hint, int order = 0, string icon = "")
             : this(parent, title, hint, order, icon)
         {
             RouteName = routeName;
         }
 
-        public AweMenu(string controller, string action, string parent, string title, string hint, int order = 0, string icon = "")
+        public AweMenuItem(string controller, string action, string parent, string title, string hint, int order = 0, string icon = "")
             : this(parent, title, hint, order, icon)
         {
             RouteName = $"${controller}#{action}";

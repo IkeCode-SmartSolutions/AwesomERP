@@ -11,7 +11,7 @@ namespace Site.Controllers
             return View();
         }
 
-        [Menu("Ajuda", 9999, null, "Sobre")]
+        [Menu("Outros", 9999, "Ajuda", "Sobre")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -19,7 +19,7 @@ namespace Site.Controllers
             return View();
         }
 
-        [Menu("Ajuda", 9999, null, "Contato")]
+        [Menu("Outros", 9999, "Ajuda", "Contato")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

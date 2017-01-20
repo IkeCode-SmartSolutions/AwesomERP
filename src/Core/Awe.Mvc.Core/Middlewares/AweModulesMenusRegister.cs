@@ -62,17 +62,17 @@ namespace Awe.Mvc.Core.Middlewares
                             var menuAttr = method.GetCustomAttribute<MenuAttribute>();
                             var routeAttr = method.GetCustomAttribute<RouteAttribute>();
 
-                            AweMenu menu;
+                            AweMenuItem menu;
 
                             var category = string.IsNullOrWhiteSpace(rootMenuDefaultTitle) ? menuAttr.Category : rootMenuDefaultTitle;
 
                             if (routeAttr == null)
                             {
-                                menu = new AweMenu(controller.Name, method.Name, menuAttr.Parent, menuAttr.Title, menuAttr.Hint, menuAttr.Order, menuAttr.Icon);
+                                menu = new AweMenuItem(controller.Name, method.Name, menuAttr.Parent, menuAttr.Title, menuAttr.Hint, menuAttr.Order, menuAttr.Icon);
                             }
                             else
                             {
-                                menu = new AweMenu(routeAttr.Name, menuAttr.Parent, menuAttr.Title, menuAttr.Hint, menuAttr.Order, menuAttr.Icon);
+                                menu = new AweMenuItem(routeAttr.Name, menuAttr.Parent, menuAttr.Title, menuAttr.Hint, menuAttr.Order, menuAttr.Icon);
                             }
 
                             var categoryOrder = module?.Order ?? menuAttr.CategoryOrder ?? 9999;

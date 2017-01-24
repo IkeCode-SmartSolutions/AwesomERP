@@ -2,7 +2,7 @@
 using System;
 
 [assembly: DefaultNamespace("Awe.Theme.Core")]
-namespace Awe.Remark.Theme
+namespace Awe.Theme.Core
 {
     public class ThemeDef : IAweTheme
     {
@@ -14,8 +14,13 @@ namespace Awe.Remark.Theme
         {
             get
             {
-                return 0;
+                return -9999;
             }
+        }
+
+        public void RegisterServices()
+        {
+            
         }
     }
 }

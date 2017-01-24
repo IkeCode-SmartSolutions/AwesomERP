@@ -49,6 +49,17 @@ namespace Awe.Mvc.Core
             return services;
         }
 
+        public static IServiceCollection RegisterThemes(this IServiceCollection services, string folderPath = "")
+        {
+            if (string.IsNullOrWhiteSpace(folderPath))
+                folderPath = PlatformServices.Default.Application.ApplicationBasePath;
+
+            var instance = AweThemeRegister.CreateInstance(services, folderPath);
+            instance.Invoke<IAweTheme>();
+
+            return services;
+        }
+
         public static IApplicationBuilder RegisterMenus(this IApplicationBuilder app, string folderPath = "")
         {
             if (string.IsNullOrWhiteSpace(folderPath))

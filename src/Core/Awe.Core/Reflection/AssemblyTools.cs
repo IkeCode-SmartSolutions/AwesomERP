@@ -139,5 +139,68 @@ namespace Awe.Core.Reflection
 
             return result;
         }
+        
+        public static IEnumerable<Type> LoadTypesThatImplements<T>(string folderPath)
+        {
+            var assemblies = LoadAssembliesThatImplements<T>(folderPath);
+
+            return assemblies.LoadTypesThatImplements<T>();
+        }
+
+        public static IEnumerable<Type> LoadTypesThatImplements<T>(this IEnumerable<Assembly> assemblies)
+        {
+            var result = new List<Type>();
+
+            foreach (var asm in assemblies)
+            {
+                var asmTypes = asm.LoadTypesThatImplements<T>();
+                result.AddRange(asmTypes);
+            }
+
+            return result;
+        }
+
+        public static IEnumerable<Type> LoadTypesThatImplements<T>(this Assembly assembly)
+        {
+            var type = typeof(T);
+            var result = assembly
+                                .GetTypes()
+                                .Where(i => !type.IsConstructedGenericType 
+                                         && type.IsAssignableFrom(i))
+                                .ToList();
+            return result;
+        }
+
+        public static IEnumerable<Type> LoadTypesThatImplementsGenericType(this IEnumerable<Assembly> assemblies, Type genericType)
+        {
+            var result = new List<Type>();
+
+            var types = assemblies.SelectMany(i => i.GetTypes()).ToList();
+
+            foreach (var asm in assemblies)
+            {
+                var asmTypes = asm.LoadTypesThatImplementsGenericType(genericType);
+                result.AddRange(asmTypes);
+            }
+
+            return result;
+        }
+
+        public static IEnumerable<Type> LoadTypesThatImplementsGenericType(this Assembly assembly, Type genericType)
+        {
+            var result = assembly
+                                .GetTypes()
+                                .Where(t => t.GetTypeInfo().ImplementedInterfaces
+                                                                .Where(i => i.IsConstructedGenericType
+                                                                         && i.GetGenericTypeDefinition() == genericType).SingleOrDefault() != null
+                                      ).ToList();
+            return result;
+        }
+
+        public static T CreateInstance<T>(this Type type, params object[] args)
+            where T : class
+        {
+            return type != null ? ((T)Activator.CreateInstance(type, args)) : null;
+        }
     }
 }

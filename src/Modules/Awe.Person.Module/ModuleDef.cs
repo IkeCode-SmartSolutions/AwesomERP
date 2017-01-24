@@ -17,5 +17,10 @@ namespace Awe.Person.Module
         public int? Order { get { return 1; } }
 
         public string RootMenuDefaultTitle { get { return "Pessoas"; } }
+
+        public void RegisterServices()
+        {
+            
+        }
     }
 }

@@ -17,5 +17,9 @@ namespace Awe.Todo.Component
                 return 0;
             }
         }
+
+        public void RegisterServices()
+        {
+        }
     }
 }

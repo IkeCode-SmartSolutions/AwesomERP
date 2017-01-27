@@ -15,6 +15,10 @@ using System.Linq;
 using System.Reflection;
 using Awe.Menu;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using System;
 
 namespace Site
 {
@@ -31,22 +35,35 @@ namespace Site
         }
 
         public IConfigurationRoot Configuration { get; }
+        public IContainer ApplicationContainer { get; private set; }
 
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
         /// <param name="services"></param>
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            var builder = new ContainerBuilder();
+
             services
                 .AddMvc()
+                //.AddTagHelpersAsServices()
                 .RegisterModulesMvc();
 
             services
                 .RegisterModulesRazorView()
                 .RegisterThemes();
-            
-            services.AddSingleton<IAweMenuService, AweMenuService>();
+
+            builder.RegisterType<AweMenuService>().As<IAweMenuService>().SingleInstance();
+
+            //services.AddSingleton<IAweMenuService, AweMenuService>();
+
+            builder.Populate(services);
+            this.ApplicationContainer = builder.Build();
+
+            var serviceProvider = new AutofacServiceProvider(this.ApplicationContainer);
+
+            return serviceProvider;
         }
 
         /// <summary>

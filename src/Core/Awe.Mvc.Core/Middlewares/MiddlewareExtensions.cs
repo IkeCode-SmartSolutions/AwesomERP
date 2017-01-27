@@ -1,10 +1,11 @@
 ﻿using Awe.Module.Core;
 using Awe.Mvc.Core.Middlewares;
+using Awe.Mvc.Core.TagHelpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
+using System;
 
 namespace Awe.Mvc.Core
 {
@@ -27,12 +28,19 @@ namespace Awe.Mvc.Core
 
         public static IMvcBuilder RegisterModulesMvc(this IMvcBuilder mvcBuilder, string folderPath = "")
         {
+            if (mvcBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(mvcBuilder));
+            }
+
             if (string.IsNullOrWhiteSpace(folderPath))
                 folderPath = PlatformServices.Default.Application.ApplicationBasePath;
 
             var instance = AweMvcModuleRegister.CreateInstance(mvcBuilder, folderPath);
             instance.Invoke<IAweComponent>();
-            
+
+            AweTagHelpersAsServices.AddTagHelpersAsServices(mvcBuilder.PartManager, mvcBuilder.Services);
+
             return mvcBuilder;
         }
 

@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Awe.Mvc.Core.Multitenancy;
 using Awe.Mvc.Core.Multitenancy.Internal;
 using System.Reflection;
-using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

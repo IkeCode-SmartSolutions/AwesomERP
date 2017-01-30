@@ -1,13 +1,7 @@
 ﻿using Awe.Core.Reflection;
 using Awe.Module.Core;
-using Awe.Mvc.Core.TagHelpers;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace Awe.Mvc.Core.Middlewares

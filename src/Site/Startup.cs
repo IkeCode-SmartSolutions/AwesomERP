@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using System;
+using Awe.Mvc.Core.Multitenancy;
 
 namespace Site
 {
@@ -45,9 +46,11 @@ namespace Site
         {
             var builder = new ContainerBuilder();
 
+            services.Configure<AweMultitenancyOptions>(Configuration.GetSection("Multitenancy"));
+            services.AddDefaultMultitenancy();
+
             services
                 .AddMvc()
-                //.AddTagHelpersAsServices()
                 .RegisterModulesMvc();
 
             services
@@ -55,7 +58,7 @@ namespace Site
                 .RegisterThemes();
 
             builder.RegisterType<AweMenuService>().As<IAweMenuService>().SingleInstance();
-
+            //services.AddSingleton<IAweMenuService, AweMenuService>();
             //services.AddSingleton<IAweMenuService, AweMenuService>();
 
             builder.Populate(services);
@@ -91,14 +94,16 @@ namespace Site
                 .UseStaticFiles()
                 .RegisterModulesStaticFiles();
 
+            app
+                .RegisterMenus()
+                .UseDefaultMultitenancy();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            app.RegisterMenus();
         }
     }
 }

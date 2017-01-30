@@ -1,3 +1,5 @@
-﻿@{
-    Layout = "Themes/Remark/_SideMenuLayout";
+﻿@inject AweAppTenant Tenant;
+@{
+    //Layout = "Themes/Remark/_Layout.SideMenu";
+    Layout = $"Themes/{Tenant.Theme}/_Layout.{Tenant.ThemeVariant}";
 }

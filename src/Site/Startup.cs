@@ -37,7 +37,7 @@ namespace Site
             var builder = new ContainerBuilder();
 
             services.Configure<AweMultitenancyOptions>(Configuration.GetSection("Multitenancy"));
-            services.AddDefaultMultitenancy();
+            services.AddDefaultCachedMultitenancy();
 
             services
                 .AddMvc()
@@ -84,8 +84,8 @@ namespace Site
                 .RegisterModulesStaticFiles();
 
             app
-                .RegisterMenus()
-                .UseDefaultMultitenancy();
+                .UseDefaultMultitenancy()
+                .RegisterMenus();
 
             app.UseMvc(routes =>
             {

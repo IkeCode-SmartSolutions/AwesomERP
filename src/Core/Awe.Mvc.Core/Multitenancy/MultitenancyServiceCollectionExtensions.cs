@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Awe.Mvc.Core.Multitenancy;
 using Awe.Mvc.Core.Multitenancy.Internal;
 using System.Reflection;
+using Awe.Menu.Service;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -18,6 +19,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // No longer registered by default as of ASP.NET Core RC2
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            //services.AddScoped<IAweMenuService, AweMenuService>();
 
             // Make Tenant and TenantContext injectable
             services.AddScoped(prov => prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenantContext<TTenant>());
@@ -45,6 +48,11 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDefaultMultitenancy(this IServiceCollection services)
         {
             return services.AddMultitenancy<AweAppTenant, AweDefaultTenantResolver>();
+        }
+
+        public static IServiceCollection AddDefaultCachedMultitenancy(this IServiceCollection services)
+        {
+            return services.AddMultitenancy<AweAppTenant, AweCachingAppTenantResolver>();
         }
     }
 }

@@ -59,7 +59,6 @@ namespace Site
 
             builder.RegisterType<AweMenuService>().As<IAweMenuService>().SingleInstance();
             //services.AddSingleton<IAweMenuService, AweMenuService>();
-            //services.AddSingleton<IAweMenuService, AweMenuService>();
 
             builder.Populate(services);
             this.ApplicationContainer = builder.Build();

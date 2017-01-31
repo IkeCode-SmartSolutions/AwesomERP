@@ -10,24 +10,27 @@ namespace Awe.Menu.Service
         
         public void RegisterMenu(int categoryOrder, string categoryName, AweMenuItem menu)
         {
-            categoryName = categoryName == null ? "Outros" : categoryName;
-
             var category = new AweMenuCategory(categoryOrder, categoryName);
 
-            if (RegisteredMenus.ContainsKey(category))
+            RegisterMenu(category, menu);
+        }
+
+        public void RegisterMenu(AweMenuCategory menuCategory, AweMenuItem menu)
+        {
+            if (RegisteredMenus.ContainsKey(menuCategory))
             {
-                RegisteredMenus[category].Add(menu);
+                RegisteredMenus[menuCategory].Add(menu);
             }
             else
             {
                 var newMenu = new List<AweMenuItem>() { menu };
-                RegisteredMenus[category] = newMenu;
+                RegisteredMenus[menuCategory] = newMenu;
             }
 
             //Adiciona os parents como item de menu, é apenas um "holder" pros filhos e evita de ter que criar [MenuAttribute] só pra isso.
-            if (!string.IsNullOrWhiteSpace(menu.Parent) && !RegisteredMenus[category].Any(i => i.Title == menu.Parent))
+            if (!string.IsNullOrWhiteSpace(menu.Parent) && !RegisteredMenus[menuCategory].Any(i => i.Title == menu.Parent))
             {
-                RegisteredMenus[category].Add(new AweMenuItem() { Title = menu.Parent });
+                RegisteredMenus[menuCategory].Add(new AweMenuItem() { Title = menu.Parent });
             }
         }
 

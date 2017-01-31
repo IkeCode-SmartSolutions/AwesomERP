@@ -1,9 +1,6 @@
-﻿using Awe.Core.Crypto;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 
-namespace Awe.Menu
+namespace Awe.Models.Theme
 {
     public class AweMenuCategory
     {
@@ -18,8 +15,6 @@ namespace Awe.Menu
 
         public AweMenuCategory(int order, string title)
         {
-            title = title == null ? "Outros" : title;
-
             Title = title;
             Order = order;
         }

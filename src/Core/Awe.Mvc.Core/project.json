@@ -14,6 +14,7 @@
     "Awe.Module.Core": "1.0.0-*",
     "Microsoft.AspNetCore.StaticFiles": "1.1.0",
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
+    "System.Reflection": "4.3.0",
     "Awe.Menu.Service": "1.0.0-*"
   },
 

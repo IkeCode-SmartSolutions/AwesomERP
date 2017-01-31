@@ -1,10 +1,17 @@
-﻿@{
+﻿@inject AweAppTenant Tenant;
+@{
     Layout = "Themes/Remark/_Layout";
 }
 
 @section styles{
 
     <link rel="stylesheet" href="/wwwroot/themes/remark/classic/base/assets/css/site.min.css" />
+
+    @if (!string.IsNullOrWhiteSpace(Tenant.Skin) || !Tenant.Skin.Equals("default", StringComparison.OrdinalIgnoreCase))
+    {
+        var skin = $"{Tenant.Skin}.css";
+        <link rel="stylesheet" href="/wwwroot/themes/remark/classic/base/assets/skins/@skin" />
+    }
 
     @RenderSection("styles", required: false)
 
@@ -34,7 +41,7 @@
         (function (document, window, $) {
             'use strict';
             var Site = window.Site;
-            $(document).ready(function () { 
+            $(document).ready(function () {
                 Site.run();
             });
         })(document, window, jQuery);

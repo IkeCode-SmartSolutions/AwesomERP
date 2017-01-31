@@ -4,17 +4,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Awe.Menu.Service;
-using Awe.Mvc.Core.TagHelpers;
 using Awe.Mvc.Core;
-using Awe.Module.Core;
-using Awe.Remark.Theme.TagHelpers;
-using Awe.Core.Reflection;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.PlatformAbstractions;
-using System.Linq;
-using System.Reflection;
-using Awe.Menu;
 using Microsoft.AspNetCore.Routing;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using System;
+using Awe.Mvc.Core.Multitenancy;
 
 namespace Site
 {
@@ -31,13 +26,19 @@ namespace Site
         }
 
         public IConfigurationRoot Configuration { get; }
+        public IContainer ApplicationContainer { get; private set; }
 
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
         /// <param name="services"></param>
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            var builder = new ContainerBuilder();
+
+            services.Configure<AweMultitenancyOptions>(Configuration.GetSection("Multitenancy"));
+            services.AddDefaultCachedMultitenancy();
+
             services
                 .AddMvc()
                 .RegisterModulesMvc();
@@ -45,8 +46,16 @@ namespace Site
             services
                 .RegisterModulesRazorView()
                 .RegisterThemes();
-            
-            services.AddSingleton<IAweMenuService, AweMenuService>();
+
+            builder.RegisterType<AweMenuService>().As<IAweMenuService>().SingleInstance();
+            //services.AddSingleton<IAweMenuService, AweMenuService>();
+
+            builder.Populate(services);
+            this.ApplicationContainer = builder.Build();
+
+            var serviceProvider = new AutofacServiceProvider(this.ApplicationContainer);
+
+            return serviceProvider;
         }
 
         /// <summary>
@@ -74,14 +83,16 @@ namespace Site
                 .UseStaticFiles()
                 .RegisterModulesStaticFiles();
 
+            app
+                .UseDefaultMultitenancy()
+                .RegisterMenus();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            app.RegisterMenus();
         }
     }
 }

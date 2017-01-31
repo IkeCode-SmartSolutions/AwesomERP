@@ -9,14 +9,14 @@ namespace Awe.Remark.Theme.TagHelpers
     /// 
     /// </summary>
     [HtmlTargetElement("bootstrap-button")]
-    public class RemarkButtonTagHelper : IAweOverrideTagHelper<ButtonTagHelper>
+    public class RemarkButtonTagHelper2 : ButtonTagHelper
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="serviceProvider">Injected IServiceProvider</param>
-        public RemarkButtonTagHelper(IServiceProvider serviceProvider) 
-            : base()
+        public RemarkButtonTagHelper2(IServiceProvider serviceProvider) 
+            : base(serviceProvider)
         {
         }
 

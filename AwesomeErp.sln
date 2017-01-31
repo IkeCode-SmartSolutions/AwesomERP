@@ -42,9 +42,9 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Api", "src\Api\Api.xproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{87B88AD4-CDAD-4204-A0E1-FCDC8E3AC89C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Awe.Menu.Model", "src\Components\Awe.Menu.Model\Awe.Menu.Model.xproj", "{4B7BE683-C9E9-4C4F-89A4-B41A71DB86B1}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Awe.Menu.Model", "src\Services\Menu\Awe.Menu.Model\Awe.Menu.Model.xproj", "{4B7BE683-C9E9-4C4F-89A4-B41A71DB86B1}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Awe.Menu.Service", "src\Components\Awe.Menu.Service\Awe.Menu.Service.xproj", "{325B1E61-E732-4407-BC41-0DBDC6ED779F}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Awe.Menu.Service", "src\Services\Menu\Awe.Menu.Service\Awe.Menu.Service.xproj", "{325B1E61-E732-4407-BC41-0DBDC6ED779F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

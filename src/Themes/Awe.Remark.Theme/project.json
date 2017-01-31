@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "Awe.Menu.Service": "1.0.0-*",
     "Awe.Module.Core": "1.0.0-*",
     "Awe.Mvc.Core": "1.0.0-*",
     "Awe.Theme.Core": "1.0.0-*",

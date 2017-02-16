@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Awe.Models.Theme
+namespace Awe.Models
 {
     public class AweMenuCategory
     {

@@ -10,6 +10,9 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using System;
 using Awe.Mvc.Core.Multitenancy;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Awe.Storage;
 
 namespace Site
 {
@@ -36,8 +39,22 @@ namespace Site
         {
             var builder = new ContainerBuilder();
 
+            services
+                .AddEntityFramework()
+                .AddEntityFrameworkSqlServer();
+            services.AddDbContext<AweCoreDbContext>(options => {
+                var coreConnectionSection = Configuration.GetSection("CoreConnection");
+                var connString = coreConnectionSection["ConnectionString"];
+                var connType = coreConnectionSection["Type"];
+
+                if (connType == "SQL")
+                {
+                    options.UseSqlServer(connString);
+                }
+            });
+
             services.Configure<AweMultitenancyOptions>(Configuration.GetSection("Multitenancy"));
-            services.AddDefaultCachedMultitenancy();
+            services.AddDefaultSqlMultitenancy();
 
             services
                 .AddMvc()

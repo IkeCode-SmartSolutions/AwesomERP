@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Awe.Mvc.Core.Multitenancy
 {
-    public class AweCachingAppTenantResolver : MemoryCacheTenantResolver<AweAppTenant>
+    public class AweCachingAppTenantResolver : MemoryCacheTenantResolver<AweAppTenant2>
     {
-        private readonly IEnumerable<AweAppTenant> tenants;
+        private readonly IEnumerable<AweAppTenant2> tenants;
 
         public AweCachingAppTenantResolver(IMemoryCache cache, ILoggerFactory loggerFactory, IOptions<AweMultitenancyOptions> options)
             : base(cache, loggerFactory)
@@ -24,20 +24,20 @@ namespace Awe.Mvc.Core.Multitenancy
             return context.Request.Host.Value.ToLower();
         }
 
-        protected override IEnumerable<string> GetTenantIdentifiers(TenantContext<AweAppTenant> context)
+        protected override IEnumerable<string> GetTenantIdentifiers(TenantContext<AweAppTenant2> context)
         {
             return context.Tenant.Hostnames;
         }
 
-        protected override Task<TenantContext<AweAppTenant>> ResolveAsync(HttpContext context)
+        protected override Task<TenantContext<AweAppTenant2>> ResolveAsync(HttpContext context)
         {
-            TenantContext<AweAppTenant> tenantContext = null;
+            TenantContext<AweAppTenant2> tenantContext = null;
 
             var tenant = tenants.FirstOrDefault(t => t.Hostnames.Any(h => h.Equals(context.Request.Host.Value.ToLower())));
 
             if (tenant != null)
             {
-                tenantContext = new TenantContext<AweAppTenant>(tenant);
+                tenantContext = new TenantContext<AweAppTenant2>(tenant);
             }
 
             return Task.FromResult(tenantContext);

@@ -40,19 +40,24 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         public static IServiceCollection AddDefaultMultitenancy<TTenantResolver>(this IServiceCollection services)
-            where TTenantResolver : class, ITenantResolver<AweAppTenant>
+            where TTenantResolver : class, ITenantResolver<AweAppTenant2>
         {
-            return services.AddMultitenancy<AweAppTenant, TTenantResolver>();
+            return services.AddMultitenancy<AweAppTenant2, TTenantResolver>();
         }
 
         public static IServiceCollection AddDefaultMultitenancy(this IServiceCollection services)
         {
-            return services.AddMultitenancy<AweAppTenant, AweDefaultTenantResolver>();
+            return services.AddMultitenancy<AweAppTenant2, AweConfigTenantResolver>();
+        }
+
+        public static IServiceCollection AddDefaultSqlMultitenancy(this IServiceCollection services)
+        {
+            return services.AddMultitenancy<AweAppTenant2, AweSqlTenantResolver>();
         }
 
         public static IServiceCollection AddDefaultCachedMultitenancy(this IServiceCollection services)
         {
-            return services.AddMultitenancy<AweAppTenant, AweCachingAppTenantResolver>();
+            return services.AddMultitenancy<AweAppTenant2, AweCachingAppTenantResolver>();
         }
     }
 }

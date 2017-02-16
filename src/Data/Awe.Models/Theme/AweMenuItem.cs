@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Awe.Models.Theme
+namespace Awe.Models
 {
     public class AweMenuItem
     {

@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Builder
 
         public static IApplicationBuilder UseDefaultMultitenancy(this IApplicationBuilder app)
         {
-            return app.UseMultitenancy<AweAppTenant>();
+            return app.UseMultitenancy<AweAppTenant2>();
         }
     }
 }
